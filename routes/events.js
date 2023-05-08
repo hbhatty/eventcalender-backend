@@ -4,6 +4,14 @@ import EventsModel from "../models/eventsSchema.js"
 export const eventsRouter = express.Router();
 
 eventsRouter.route("/")
+    .get(async (req, res) => {
+        try {
+            const events = await EventsModel.find({});
+            res.send(events)
+        } catch (error) {
+            console.log(error)
+        }
+    })
     .post(async (req, res) => {
         const newE = new EventsModel(req.body)
         try{
